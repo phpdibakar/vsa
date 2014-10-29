@@ -24,12 +24,14 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+/* $env = $app->detectEnvironment(array(
 
 	'local' => array('vsalocal.org.ca'),
 
-));
-
+)); */
+$env = $app->detectEnvironment(function(){
+	return isset($_SERVER['APPLICATION_ENV']) ? $_SERVER['APPLICATION_ENV'] : 'local';
+});
 /*
 |--------------------------------------------------------------------------
 | Bind Paths

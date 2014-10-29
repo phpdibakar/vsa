@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UsersTableCreate extends Migration {
+class TableUsersCreate extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -15,7 +15,9 @@ class UsersTableCreate extends Migration {
 		Schema::create('users', function(BluePrint $table){
 			$table->increments('id');
 			$table->integer('role_id')->unsigned();
-			$table->foreign('role_id')->references('roles')->on('id');
+			$table->foreign('role_id')->references('id')->on('roles');
+			$table->integer('gender_id')->unsigned();
+			$table->foreign('gender_id')->references('id')->on('genders');
 			$table->string('email')->unique();
 			$table->string('password', 255);
 			$table->string('fname');
@@ -23,6 +25,7 @@ class UsersTableCreate extends Migration {
 			$table->tinyInteger('active');
 			$table->timestamps();
 			$table->rememberToken();
+			
 		});
 	}
 

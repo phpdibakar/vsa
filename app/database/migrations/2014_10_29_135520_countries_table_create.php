@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UsersProfileTableCreate extends Migration {
+class CountriesTableCreate extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,11 @@ class UsersProfileTableCreate extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('countries', function(BluePrint $table){
+			$table->increments('id');
+			$table->char('code', 4)->unique();
+			$table->string('name', 100);
+		});
 	}
 
 	/**
@@ -22,7 +26,7 @@ class UsersProfileTableCreate extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('countries');
 	}
 
 }
