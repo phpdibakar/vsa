@@ -27,7 +27,7 @@ class RolesTableCreate extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('roles');
+		Schema::dropIfExists('roles');
 	}
 
 }

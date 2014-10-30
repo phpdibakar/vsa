@@ -12,7 +12,13 @@ class StatesTableCreate extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('states', function(Blueprint $table){
+			$table->increments('id');
+			$table->string('name', 50);
+			$table->char('code', 4)->unique();
+			$table->integer('country_id')->unsigned();
+			$table->foreign('country_id')->references('id')->on('countries');
+		});
 	}
 
 	/**
@@ -22,7 +28,7 @@ class StatesTableCreate extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists('states');
 	}
 
 }

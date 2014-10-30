@@ -16,3 +16,17 @@ Route::get('/', function()
 	return App::environment();
 	//return View::make('hello');
 });
+
+Route::get('/adminlogin', function(){
+	return View::make('admin.login');
+});
+
+Route::filter('auth.admin', function(){
+	if(!Auth::check())
+		return Redirect::to('/adminlogin');
+});
+
+Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function(){
+	Route::resource('users', 'UserController');
+});
+
