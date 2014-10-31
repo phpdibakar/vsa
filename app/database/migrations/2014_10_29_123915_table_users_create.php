@@ -23,6 +23,7 @@ class TableUsersCreate extends Migration {
 			$table->string('fname');
 			$table->string('lname');
 			$table->tinyInteger('active');
+			$table->tinyInteger('admin')->default(0);
 			$table->timestamps();
 			$table->rememberToken();
 			

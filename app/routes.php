@@ -13,20 +13,30 @@
 
 Route::get('/', function()
 {
-	return App::environment();
-	//return View::make('hello');
+	//return App::environment();
+	return View::make('hello');
 });
 
+//route to accept admin login
 Route::get('/adminlogin', function(){
 	return View::make('admin.login');
 });
+Route::post('/adminlogin', array('uses' => 'UserController@postLogin'));
 
-Route::filter('auth.admin', function(){
+//Route to redirect to the admin user dashboard when /admin is called 
+Route::get('/admin', function(){
+	return Redirect::to('/admin/users/dashboard');
+});
+
+
+//filter to check every access to the admin is validated with a logged in admin user
+ Route::filter('auth.admin', function(){
 	if(!Auth::check())
 		return Redirect::to('/adminlogin');
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function(){
 	Route::resource('users', 'UserController');
+	
+	//Route::get('admin/users/dashboard/{id}', array('uses' => 'UserController@getAdminDashBoard'));
 });
-

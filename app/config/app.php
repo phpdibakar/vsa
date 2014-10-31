@@ -121,7 +121,9 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'VSA\Users\UserServiceProvider',
 		'Orangehill\Iseed\IseedServiceProvider',
+		
 	),
 
 	/*

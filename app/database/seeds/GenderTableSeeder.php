@@ -1,4 +1,5 @@
 <?php
+use VSA\Users\Model\Gender;
 
 class GenderTableSeeder extends Seeder {
 

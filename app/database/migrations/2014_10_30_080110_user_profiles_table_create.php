@@ -21,14 +21,14 @@ class UserProfilesTableCreate extends Migration {
 			$table->longText('address');
 			$table->string('zip', 10);
 			$table->mediumInteger('home_phone');
-			$table->mediumInteger('work_phone');
-			$table->mediumInteger('mobile');
-			$table->mediumInteger('pagers');
+			$table->mediumInteger('work_phone')->nullable();
+			$table->mediumInteger('mobile')->nullable();
+			$table->mediumInteger('pagers')->nullable();
 			$table->string('emergency_contact_name', 50);
 			$table->mediumInteger('emergency_phone_number');
-			$table->string('occupation', 50);
 			$table->integer('emergency_relation_id')->unsigned();
 			$table->foreign('emergency_relation_id')->references('id')->on('emergency_relations');
+			$table->string('occupation', 50);
 			$table->timestamps();
 		});
 	}

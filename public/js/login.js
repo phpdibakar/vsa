@@ -61,7 +61,7 @@ var Login = function () {
         var errorHandler = $('.errorHandler', form);
         form.validate({
             rules: {
-                username: {
+                email: {
                     minlength: 2,
                     required: true
                 },

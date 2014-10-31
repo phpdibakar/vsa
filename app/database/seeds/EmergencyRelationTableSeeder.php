@@ -1,4 +1,5 @@
 <?php
+use VSA\Users\Model\EmergencyRelation;
 
 class EmergencyRelationTableSeeder extends Seeder {
 

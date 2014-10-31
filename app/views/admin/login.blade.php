@@ -9,19 +9,26 @@
 				<p>
 					Please enter your name and password to log in.
 				</p>
-				<form class="form-login" action="index.html">
+				{{ Form::open(array('url' => '/adminlogin', 'class' => 'form-login')) }}
 					<div class="errorHandler alert alert-danger no-display">
 						<i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
 					</div>
+					@if ($errors->has())
+						<div class="alert alert-danger">
+							@foreach ($errors->all() as $error)
+								<p> {{ $error }}	</p>	
+							@endforeach
+						</div>
+					@endif
 					<fieldset>
 						<div class="form-group">
 							<span class="input-icon">
-								<input type="text" class="form-control" name="username" placeholder="Username">
+								{{ Form::email('email', Input::old('email'), array('class' => 'form-control', 'placeholder' => 'Email')) }}
 								<i class="fa fa-user"></i> </span>
 						</div>
 						<div class="form-group form-actions">
 							<span class="input-icon">
-								<input type="password" class="form-control password" name="password" placeholder="Password">
+								{{ Form::password('password', array('class' => 'form-control password', 'placeholder' => 'Password')) }}
 								<i class="fa fa-lock"></i>
 								<a class="forgot" href="#">
 									I forgot my password
@@ -29,15 +36,13 @@
 						</div>
 						<div class="form-actions">
 							<label for="remember" class="checkbox-inline">
-								<input type="checkbox" class="grey remember" id="remember" name="remember">
+								{{ Form::checkbox('remember', 1, Input::old('remember'), array('class' => 'grey remember', 'id' => 'remember')) }}
 								Keep me signed in
 							</label>
-							<button type="submit" class="btn btn-bricky pull-right">
-								Login <i class="fa fa-arrow-circle-right"></i>
-							</button>
+							{{ Form::submit('Login', array('class' => 'btn btn-bricky pull-right')) }}
 						</div>
 					</fieldset>
-				</form>
+				{{ Form::close() }}
 			</div>
 			<!-- end: LOGIN BOX -->
 			<!-- start: FORGOT BOX -->

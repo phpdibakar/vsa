@@ -1,4 +1,5 @@
 <?php
+use VSA\Users\Model\Role;
 
 class RoleTableSeeder extends Seeder {
 

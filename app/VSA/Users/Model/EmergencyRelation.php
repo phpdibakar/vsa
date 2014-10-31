@@ -1,5 +1,9 @@
 <?php
-class EmergencyRelation extends Eloquent{
+namespace VSA\Users\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class EmergencyRelation extends Model{
 	/**
 	 * The timestamps fields used default by the model.
 	 *

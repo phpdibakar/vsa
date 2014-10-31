@@ -9,7 +9,7 @@ class StatesTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		\DB::table('states')->truncate();
+		\DB::table('states')->delete();
         
 		\DB::table('states')->insert(array (
 			0 => 
