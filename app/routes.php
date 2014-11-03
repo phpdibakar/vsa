@@ -36,7 +36,10 @@ Route::get('/admin', function(){
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function(){
-	Route::resource('users', 'UserController');
 	
-	//Route::get('admin/users/dashboard/{id}', array('uses' => 'UserController@getAdminDashBoard'));
+	Route::controller('users', 'UserController');
+	
 });
+
+//Route configuration to have forget password service functionality
+Route::controller('password', 'RemindersController');

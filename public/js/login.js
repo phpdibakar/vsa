@@ -89,10 +89,34 @@ var Login = function () {
                 }
             },
             submitHandler: function (form) {
-                errorHandler2.hide();
+				form2.submit();
+                //errorHandler2.hide();
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 errorHandler2.show();
+            }
+        });
+    };
+	
+	var runResetPWValidator = function () {
+        var form3 = $('.form-pw-reset');
+        var errorHandler3 = $('.errorHandler', form3);
+        form3.validate({
+            rules: {
+				password: {
+					required: true,
+				},
+				password_confirmation: {
+					required: true,
+					equalTo: '#password'
+				},
+            },
+            submitHandler: function (form) {
+				form3.submit();
+                //errorHandler2.hide();
+            },
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                errorHandler3.show();
             }
         });
     };
@@ -149,6 +173,7 @@ var Login = function () {
             runLoginValidator();
             runForgotValidator();
             runRegisterValidator();
+			runResetPWValidator();
         }
     };
 }();

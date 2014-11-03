@@ -1,13 +1,15 @@
 <?php
 use VSA\Users\Repositories\UserRepository;
+use Illuminate\Support\MessageBag;
+
 class UserController extends BaseController{
 	
 	public function __construct(UserRepository $user){
 		$this->user = $user;
 	}
 	
-	public function dashboard($id){
-		return $this->user->getFullName($id);
+	public function anyDashboard(){
+		return View::make('admin.dashboard');
 	}
 	
 	public function postLogin(){
@@ -22,13 +24,25 @@ class UserController extends BaseController{
 				->withInput()
 				->withErrors($validator);
 		}else{
-			if(Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password'))))
-				return Redirect::intended('/admin/user/dashboard');
+			if(Auth::attempt(array(
+				'email' => Input::get('email'), 
+				'password' => Input::get('password'), 
+				'admin' => 1
+				), (bool)Input::get('remember')
+			))
+				return Redirect::intended('/admin/users/dashboard');
 			else
 				return Redirect::to('/adminlogin')
-				->withInput();
-				//->withErrors(Auth);
+				->withInput()
+				->withErrors(new MessageBag(['auth' => ['The email or password is wrong or your account is not authorized for administration.']]));
 		}
+	}
+	
+	public function anyLogout(){
+		if(Auth::check())
+			Auth::logout();
+		
+		return Redirect::to('/admin/users/dashboard');
 	}
 	
 }
