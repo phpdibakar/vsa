@@ -211,37 +211,32 @@
 						<!-- start: USER DROPDOWN -->
 						<li class="dropdown current-user">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<img src="assets/images/avatar-1-small.jpg" class="circle-img" alt="">
-								<span class="username">Peter Clark</span>
+								<img src="{{ Auth::user()->avatar->url('small') }}" class="circle-img" alt="">
+								<span class="username">{{ Auth::user()->fname. ' '. Auth::user()->lname }}</span>
 								<i class="clip-chevron-down"></i>
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="pages_user_profile.html">
+									<a href="{{ URL::to('admin/users/profile') }}">
 										<i class="clip-user-2"></i>
 										&nbsp;My Profile
 									</a>
 								</li>
 								<li>
-									<a href="pages_calendar.html">
-										<i class="clip-calendar"></i>
-										&nbsp;My Calendar
-									</a>
-								<li>
-									<a href="pages_messages.html">
+									<a href="{{ URL::to('admin/messages/inbox') }}">
 										<i class="clip-bubble-4"></i>
 										&nbsp;My Messages (3)
 									</a>
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="utility_lock_screen.html"><i class="clip-locked"></i>
+									<a href="{{ URL::to('admin/users/lock') }}"><i class="clip-locked"></i>
 										&nbsp;Lock Screen </a>
 								</li>
 								<li>
 									<a href="{{ URL::to('/admin/users/logout') }}">
 										<i class="clip-exit"></i>
-										&nbsp;Log Out
+										&nbsp;Sign Out
 									</a>
 								</li>
 							</ul>

@@ -16,7 +16,8 @@ class SettingsTableCreate extends Migration {
 			$table->increments('id');
 			$table->integer('theme_id')->unsigned();
 			$table->foreign('theme_id')->references('id')->on('themes');
-			$table->string('site_name', 100);
+			$table->string('name', 100);
+			$table->string('tagline', 255)->nullable();
 			$table->string('admin_email', 100);
 			$table->string('logo', 255);
 			$table->timestamp('updated_on');

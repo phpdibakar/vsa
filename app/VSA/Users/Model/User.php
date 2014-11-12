@@ -6,10 +6,12 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Codesleeve\Stapler\ORM\StaplerableInterface;
+use Codesleeve\Stapler\ORM\EloquentTrait;
 
-class User extends Model implements UserInterface, RemindableInterface {
+class User extends Model implements UserInterface, RemindableInterface, StaplerableInterface {
 
-	use UserTrait, RemindableTrait;
+	use UserTrait, RemindableTrait, EloquentTrait;
 
 	/**
 	 * The database table used by the model.
@@ -26,18 +28,71 @@ class User extends Model implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 	
 	/**
+	 * The attributes included from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	
+	protected $fillable  = ['fname', 'lname', 'avatar', 'visible', 'gender_id'];
+	
+	//constructor 
+	public function __construct(array $attributes = array()) {
+        $this->hasAttachedFile('avatar', [
+            'styles' => [
+            'small' => '30x30',
+            'medium' => '300x300',
+            'thumb' => '150x150'
+            ]
+        ]);
+
+        parent::__construct($attributes);
+    }
+	
+	/**
 	* Validation for login
 	*
 	*/
-	private $_loginValidationRules = [
-		'email' => 'required|email',
-		'password' => 'required',
-	];
 	
-	public function getLoginValidationRules(){
-		return $this->_loginValidationRules;
+	public static function getLoginValidationRules(){
+		return [
+			'email' => 'required|email',
+			'password' => 'required',
+		];
 	}
 	
+	public static function getUpdateValidationRules(){
+		return [
+			'fname' => 'required|alpha',
+			'lname' => 'required|alpha',
+			'gender' => 'numeric',
+		];
+	}
+	
+	public static function getPasswordValidationRules(){
+		return [
+			'current_password' => 'required|min:6|max:15',
+			'password' => 'required|min:6|max:15',
+			'conf_password' => 'required|same:password',
+		];
+	}
+	
+	public static function getLoginEmailChangeValidations(){
+		return [
+			'email' => 'required|email',
+			'conf_email' => 'required|email|same:email',
+		];
+	}
+	
+	public static function getAttributesNiceNames(){
+		return [
+			'fname' => 'First Name',
+			'lname' => 'last Name',
+			'gender_id' => 'Gender',
+			'email' => 'Email Address',
+			'avatar' => 'Avatar Image',
+			'visible' => 'visibility',
+		];
+	}
 	/**
 	 * Relationships
 	*/

@@ -22,8 +22,10 @@ class TableUsersCreate extends Migration {
 			$table->string('password', 255);
 			$table->string('fname');
 			$table->string('lname');
+			$table->string('avatar', 255)->nullable();
 			$table->tinyInteger('active');
 			$table->tinyInteger('admin')->default(0);
+			$table->tinyInteger('visible')->default(1);
 			$table->timestamps();
 			$table->rememberToken();
 			

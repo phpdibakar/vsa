@@ -47,7 +47,7 @@
 								{{ Form::checkbox('remember', 1, Input::old('remember'), array('class' => 'grey remember', 'id' => 'remember')) }}
 								Keep me signed in
 							</label>
-							{{ Form::submit('Login', array('class' => 'btn btn-bricky pull-right')) }}
+							{{ Form::submit('Sign In', array('class' => 'btn btn-bricky pull-right')) }}
 						</div>
 					</fieldset>
 				{{ Form::close() }}

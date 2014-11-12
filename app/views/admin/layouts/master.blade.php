@@ -51,14 +51,15 @@
 					</button>
 					<!-- end: RESPONSIVE MENU TOGGLER -->
 					<!-- start: LOGO -->
-					<a class="navbar-brand" href="index.html">
-						CLIP<i class="clip-clip"></i>ONE
+					<a class="navbar-brand" href="{{ URL::to('/admin/users/dashboard') }}">
+					
+						<img src="{{ Image::path(Settings::getLogoPath(). Settings::getLogoImage(), 'resizeCrop', 24, 24) }}" alt="{{ Settings::getName() }}" />
 					</a>
 					<!-- end: LOGO -->
 				</div>
 				<div class="navbar-tools">
 					<!-- start: TOP NAVIGATION MENU -->
-						@include('admin.elements.top_menu')
+						@include('admin._partials.top_menu')
 					<!-- end: TOP NAVIGATION MENU -->
 				</div>
 			</div>
@@ -69,7 +70,7 @@
 		<div class="main-container">
 			<div class="navbar-content">
 				<!-- start: SIDEBAR -->
-					@include('admin.elements.sidebar')
+					@include('admin._partials.sidebar')
 				<!-- end: SIDEBAR -->
 			</div>
 			<!-- start: PAGE -->
@@ -107,7 +108,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<!-- start: PAGE TITLE & BREADCRUMB -->
-								@include('admin.elements.breadcrumb')
+								@include('admin._partials.breadcrumb')
 							<!-- end: PAGE TITLE & BREADCRUMB -->
 						</div>
 					</div>
@@ -123,7 +124,7 @@
 		<!-- start: FOOTER -->
 		<div class="footer clearfix">
 			<div class="footer-inner">
-				2013 &copy; clip-one by cliptheme.
+				{{ date('Y') }} &copy; {{ Settings::getName() }}.
 			</div>
 			<div class="footer-items">
 				<span class="go-top"><i class="clip-chevron-up"></i></span>

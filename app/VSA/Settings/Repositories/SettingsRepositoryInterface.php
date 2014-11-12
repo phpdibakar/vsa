@@ -1,9 +1,9 @@
 <?php
-namespace VSA\Site\Repositories;
+namespace VSA\Settings\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-interface SiteRepositoryInterface{
+interface SettingsRepositoryInterface{
 	/**
 	 * Returns the full name of a user.
 	 *
@@ -25,11 +25,11 @@ interface SiteRepositoryInterface{
 	/**
 	 * Returns the full name of a user.
 	 *
-	 * @param int id of the user
+	 * @param bool absolute to determine absolute or relative
 	 * @return string.
 	 * @throws ModelNotFoundException when the user is not found
 	*/
-	public function getLogoPath();
+	public function getLogoPath($absolute = false);
 	
 	/**
 	 * Returns the image file name used and uploaded for this website.
@@ -41,11 +41,13 @@ interface SiteRepositoryInterface{
 	public function getLogoImage();
 	
 	/**
-	 * Saves the various site settings
+	 * Returns the admin email address used for this website.
 	 *
-	 * @param Model
-	 * @return bool.
-	 * @throws Exception when the user is not found
+	 * @param 
+	 * @return string.
+	 * @throws ModelNotFoundException when the user is not found
 	*/
-	public function saveSettings(Model $site);
+	
+	public function getAdminEmail();
+	
 }

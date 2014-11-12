@@ -122,8 +122,12 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'VSA\Users\UserServiceProvider',
+		'VSA\Settings\SettingsServiceProvider',
 		'Orangehill\Iseed\IseedServiceProvider',
-		
+		'Barryvdh\Debugbar\ServiceProvider',
+		'Iveoles\Image\ImageServiceProvider',
+		'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider',
+		'DaveJamesMiller\Breadcrumbs\ServiceProvider',
 	),
 
 	/*
@@ -190,6 +194,10 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+		'Settings'        => 'VSA\Settings\Facades\Settings',
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		'Image' => 'Iveoles\Image\Facades\Image',
+		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 	),
 
 );

@@ -19,7 +19,7 @@ Route::get('/', function()
 
 //route to accept admin login
 Route::get('/adminlogin', function(){
-	return View::make('admin.login');
+	return View::make('admin.users.login');
 });
 Route::post('/adminlogin', array('uses' => 'UserController@postLogin'));
 
@@ -43,3 +43,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function(){
 
 //Route configuration to have forget password service functionality
 Route::controller('password', 'RemindersController');
+
+//Route to get ajax list of states for a selected country
+Route::post('states/ajaxGetStates', array('uses' => 'StatesController@postStates'));

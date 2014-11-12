@@ -5,7 +5,11 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"orangehill/iseed": "dev-master"
+		"orangehill/iseed": "dev-master",
+		"barryvdh/laravel-debugbar": "~1.8",
+		"iveoles/image": "~1.2",
+		"codesleeve/laravel-stapler": "~1.0",
+		"davejamesmiller/laravel-breadcrumbs": "~2.3.0"
 	},
 	"autoload": {
 		"classmap": [

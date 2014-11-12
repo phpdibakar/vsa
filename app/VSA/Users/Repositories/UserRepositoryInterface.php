@@ -13,5 +13,33 @@ interface UserRepositoryInterface{
 	*/
 	public function getFullName($id);
 	
-	public function getLoginValidationRule();
+	/**
+	 * create or updates the data for users
+	 *
+	 * @param Model user
+	 * @return Model.
+	 * @throws ModelNotFoundException when the user is not found
+	*/
+	public function save(Model $data);
+	
+	/**
+	 * updates a user password against his current password hash 
+	 * identified by his /her id
+	 * @param int userId
+	 * @param string newPassword
+	 * @param string oldPasswordHash
+	 * @return bool.
+	 * @throws Exception
+	*/
+	public function updatePassword($userId, $newPassword, $oldPassword, $oldPasswordHash);
+	
+	/**
+	 * updates a user login email address after checking its availability by duplicate check
+	 * identified by his /her id
+	 * @param int userId
+	 * @param string email
+	 * @return bool.
+	 * @throws Exception
+	*/
+	public function updateLoginEmail($userId, $email);
 }
