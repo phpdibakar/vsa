@@ -5,6 +5,7 @@ use VSA\Users\Model\Gender;
 use VSA\Users\Model\UserProfile;
 use VSA\Users\Model\EmergencyRelation;
 use VSA\Users\Model\Role;
+use Illuminate\Support\MessageBag;
 
 class UserController extends BaseController{
 	
@@ -40,33 +41,38 @@ class UserController extends BaseController{
 			!$validatorUserProfile->fails())
 		{
 			try{
-				$user = User::find(0); //building an empty object
-				//$user = new User();
+				$user = new User();
+				
+				//filling data
 				$user->fill(Input::except([
 						'_token',
 						'profile',
 					]
 				));
-				$user->profile->fill(Input::only([
-						'profile',
-					]
-				));
 				
-				$this->user->save($user);
+				//making password
+				$user->password = Hash::make(Input::get('password'));
 				
-				Redirect::to('/admin/users/register')
+				//saving the user data then updating profile data
+				$user = $this->user->save($user)
+					->profile()->createMany(Input::only('profile'));
+				
+				return Redirect::to('/admin/users/register')
 						->with('success', 'Profile created successfully!');
 			}catch(\Exception $e){
-				Redirect::to('/admin/users/register')
+				return Redirect::back()
 					-> with('error', $e->getMessage())
-					-> withError($validatorUser)
-					-> withError($validatorUserProfile)
+					-> withErrors($validatorUser)
+					-> withErrors($validatorUserProfile)
 					-> withInput();
 			}
 		}else{
-			Redirect::to('/admin/users/register')
-					-> withError($validatorUser)
-					-> withError($validatorUserProfile)
+			//dd('here');
+			return Redirect::back()
+					-> withErrors(array_merge_recursive(
+						$validatorUser->messages()->toArray(),
+						$validatorUserProfile->messages()->toArray()
+					))
 					-> withInput();
 		}
 	}

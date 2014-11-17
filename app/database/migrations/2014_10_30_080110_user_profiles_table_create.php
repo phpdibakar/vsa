@@ -20,8 +20,6 @@ class UserProfilesTableCreate extends Migration {
 			$table->foreign('state_id')->references('id')->on('states');
 			$table->integer('country_id')->unsigned();
 			$table->foreign('country_id')->references('id')->on('countries');
-			$table->integer('role_id')->unsigned();
-			$table->foreign('role_id')->references('id')->on('roles');
 			$table->longText('address');
 			$table->string('zip', 10);
 			$table->mediumInteger('home_phone');

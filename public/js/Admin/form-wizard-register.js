@@ -28,8 +28,8 @@ var FormWizard = function () {
             errorPlacement: function (error, element) { // render error placement for each input type
                 if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
                     error.insertAfter($(element).closest('.form-group').children('div').children().last());
-                } else if (element.attr("name") == "card_expiry_mm" || element.attr("name") == "card_expiry_yyyy") {
-                    error.appendTo($(element).closest('.form-group').children('div'));
+                } else if (element.hasClass("date-picker")) {
+                    
                 } else {
                     error.insertAfter(element);
                     // for other inputs, just perform default behavior
@@ -71,6 +71,10 @@ var FormWizard = function () {
                     required: true
                 },
                 "profile[address]" : {
+                    minlength: 6,
+					required: true
+                },
+				"profile[home_phone]" : {
                     minlength: 6,
 					required: true
                 },

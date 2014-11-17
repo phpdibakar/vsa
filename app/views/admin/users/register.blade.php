@@ -25,6 +25,17 @@
 				<p> {{ Session::get('error') }}	</p>	
 		</div>
 	@endif
+	@if($errors->has())
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+		@foreach ($errors->all() as $error)
+				<p> {{ $error }}</p>
+		@endforeach
+		</div>
+	@endif
+	
 <div class="row">
 	<div class="col-sm-12">
 		<!-- start: FORM WIZARD PANEL -->
@@ -95,7 +106,7 @@
 											{{ Form::text('fname', Input::old('fname'), ['class' => 'form-control', 'placeholder' => 'First Name', 'tabindex' => 1]) }}
 											
 											@if($errors->has('fname'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('fname') }}</span>
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('fname') }}</span>
 											@endif
 										</div>
 									</div>
@@ -107,7 +118,7 @@
 											{{ Form::email('email', Input::old('email'), ['class' => 'form-control', 'placeholder' => 'Email', 'tabindex' => 3, 'id' => 'email']) }}
 											
 											@if($errors->has('email'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('email') }}</span>
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('email') }}</span>
 											@endif
 										</div>
 									</div>
@@ -119,7 +130,7 @@
 											{{ Form::email('email_confirmation', Input::old('conf_email'), ['class' => 'form-control', 'placeholder' => 'Email', 'tabindex' => 4]) }}
 											
 											@if($errors->has('email_confirmation'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('email_confirmation') }}</span>
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('email_confirmation') }}</span>
 											@endif
 										</div>
 									</div>
@@ -133,7 +144,7 @@
 												<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
 												
 												@if($errors->has('dob'))
-													<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('dob') }}</span>
+													<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('dob') }}</span>
 												@endif
 											</div>
 										</div>
@@ -148,7 +159,7 @@
 											{{ Form::text('lname', Input::old('lname'), ['class' => 'form-control', 'placeholder' => 'Last Name', 'tabindex' => 2]) }}
 											
 											@if($errors->has('lname'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('lname') }}</span>
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('lname') }}</span>
 											@endif
 										</div>
 									</div>
@@ -160,7 +171,7 @@
 											{{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'id' => 'password', 'tabindex' => 5]) }}
 											
 											@if($errors->has('password'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('password') }}</span>
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('password') }}</span>
 											@endif
 										</div>
 									</div>
@@ -172,7 +183,7 @@
 											{{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password', 'tabindex' => 6]) }}
 											
 											@if($errors->has('password_confirmation'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('password_confirmation') }}</span>
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('password_confirmation') }}</span>
 											@endif
 										</div>
 									</div>
@@ -188,7 +199,7 @@
 									</label>
 									@endforeach
 									@if($errors->has('gender_id'))
-										<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('gender_id') }}</span>
+										<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('gender_id') }}</span>
 									@endif
 								</div>
 								</div>
@@ -213,8 +224,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[address]', Input::old('profile[address]'), ['class' => 'form-control', 'placeholder' => 'Street Address', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[address]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[address]') }}</span>
+											@if($errors->has('address'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('address') }}</span>
 											@endif
 										</div>
 									</div>
@@ -225,8 +236,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[city]', Input::old('profile[city]'), ['class' => 'form-control', 'placeholder' => 'City', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[city]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[city]') }}</span>
+											@if($errors->has('city'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('city') }}</span>
 											@endif
 										</div>
 									</div>
@@ -237,8 +248,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[zip]', Input::old('profile[zip]'), ['class' => 'form-control', 'placeholder' => 'Postal / Zip Code', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[zip]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[zip]') }}</span>
+											@if($errors->has('zip'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('zip') }}</span>
 											@endif
 										</div>
 									</div>
@@ -249,8 +260,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[home_phone]', Input::old('profile[home_phone]'), ['class' => 'form-control', 'placeholder' => 'Home Phone', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[home_phone]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[home_phone]') }}</span>
+											@if($errors->has('home_phone'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('home_phone') }}</span>
 											@endif
 										</div>
 										<div class="col-sm-1">
@@ -266,8 +277,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[work_phone]', Input::old('profile[work_phone]'), ['class' => 'form-control', 'placeholder' => 'Work / Other', 'tabindex' => 10]) }}
 							
-											@if($errors->has('profile[work_phone]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[work_phone]') }}</span>
+											@if($errors->has('work_phone'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('work_phone') }}</span>
 											@endif
 											
 											<span class=""><i class="fa fa-info-circle"></i> * Preferred method of contact (1 selection only) </span>
@@ -314,8 +325,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[mobile]', Input::old('profile[mobile]'), ['class' => 'form-control', 'placeholder' => 'Mobile', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[mobile]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[mobile]') }}</span>
+											@if($errors->has('mobile'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('mobile') }}</span>
 											@endif
 										</div>
 										<div class="col-sm-1">
@@ -331,8 +342,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[pager]', Input::old('profile[pager]'), ['class' => 'form-control', 'placeholder' => 'Pager', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[pager]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[pager]') }}</span>
+											@if($errors->has('pager'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('pager') }}</span>
 											@endif
 										</div>
 										<div class="col-sm-1">
@@ -368,8 +379,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[emergency_contact_name]', Input::old('profile[emergency_contact_name]'), ['class' => 'form-control', 'placeholder' => 'Emergency Contact Name', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[emergency_contact_name]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[emergency_contact_name]') }}</span>
+											@if($errors->has('emergency_contact_name'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('emergency_contact_name') }}</span>
 											@endif
 										</div>
 									</div>
@@ -380,8 +391,8 @@
 										<div class="col-sm-7">
 											{{ Form::select('profile[emergency_relation_id]', $relationships, Input::old('profile[emergency_relation_id]'), array('class' => 'form-control')); }}
 										
-											@if($errors->has('profile[emergency_relation_id]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[emergency_relation_id]') }}</span>
+											@if($errors->has('emergency_relation_id'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('emergency_relation_id') }}</span>
 											@endif
 										</div>
 									</div>
@@ -390,10 +401,10 @@
 											Role <span class="symbol required"></span>
 										</label>
 										<div class="col-sm-7">
-											{{ Form::select('profile[role_id]', $roles, Input::old('profile[role_id]'), array('class' => 'form-control')); }}
+											{{ Form::select('role_id', $roles, Input::old('role_id'), array('class' => 'form-control')); }}
 										
-											@if($errors->has('profile[role_id]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[role_id]') }}</span>
+											@if($errors->has('role_id'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('role_id') }}</span>
 											@endif
 										</div>
 									</div>
@@ -406,8 +417,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[emergency_phone_number]', Input::old('profile[emergency_phone_number]'), ['class' => 'form-control', 'placeholder' => 'Emergency Phone', 'tabindex' => 10]) }}
 											
-											@if($errors->has('profile[emergency_phone_number]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[emergency_phone_number]') }}</span>
+											@if($errors->has('emergency_phone_number'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('emergency_phone_number') }}</span>
 											@endif
 										</div>
 									</div>
@@ -426,8 +437,8 @@
 										<div class="col-sm-7">
 											{{ Form::text('profile[occupation]', Input::old('profile[occupation]'), ['class' => 'form-control', 'placeholder' => 'Occupation', 'tabindex' => 10]) }}
 													
-											@if($errors->has('profile[occupation]'))
-												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $error->first('profile[occupation]') }}</span>
+											@if($errors->has('occupation'))
+												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('occupation') }}</span>
 											@endif
 										</div>
 									</div>
