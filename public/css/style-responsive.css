@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+/******************************* Max Width 960 Open ***********************************/
+@media screen and (max-width:960px) {
+/**Main Box Login**/
+.main-login-box{width:60%;margin:0 auto;}
+}
+/******************************* Max Width 960 Close ***********************************/
+
+/******************************* Max Width 767 Open ***********************************/
+@media screen and (max-width:767px) {
+/**Navigation**/
+#navigation .navbar-header{background-color:#333333;}
+#navigation ul li a:hover{background-color:#696969;}
+/**Main Box Login**/
+.main-login-box{width:100%;margin:0 auto;}
+/**Footer**/
+.footer{padding:15px 0 15px 0;}
+/**Button**/
+.btn-custom-container1{margin-bottom:15px !important;}
+}
+/******************************* Max Width 767 Close ***********************************/
+
+/******************************* Max Width 450 Open ***********************************/
+@media screen and (max-width:450px) {
+/**Footer**/
+.footer-nav ul li{display:block;float:none;padding:10px 0;}
+.footer-nav ul li a{border:none;}
+/**Main Box Login Inner**/
+.main-login-box .box-login fieldset label.checkbox-inline.pull-right{display:block;width:100%;float:none;}
+}
+/******************************* Max Width 450 Close ***********************************/
+
+/******************************* Min Width 768 Open ***********************************/
+@media screen and (min-width:768px) {
+/**Navigation**/
+.navbar-brand{display:none;}
+#navigation ul{display:block;float:none;width:100%; text-align:center;}
+#navigation ul li{display:inline-block;float:none;padding:15px 0;}
+#navigation ul li a{padding:0 15px; border-right:1px solid #ffffff;display:block;}
+#navigation ul li:last-child a{border-right:none;}
+#navigation ul li a:hover{color:#d67105;}
+}
+/******************************* Min Width 768 Close ***********************************/

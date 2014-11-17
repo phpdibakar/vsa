@@ -40,6 +40,12 @@ Route::group(array('prefix' => Config::get('app.adminPrefix'), 'before' => 'auth
 	Route::controller('users', 'UserController');
 	
 });
+Route::get('/users/register', array('as' => 'registration', 'uses' => 'UserController@getRegister'));
+
+//route to accept login
+Route::get('/login', function(){
+	return View::make('users.login');
+});
 
 //Route configuration to have forget password service functionality
 Route::controller('password', 'RemindersController');
