@@ -23,7 +23,6 @@ class UserProfilesTableCreate extends Migration {
 			$table->integer('role_id')->unsigned();
 			$table->foreign('role_id')->references('id')->on('roles');
 			$table->longText('address');
-			$table->string('address', 100);
 			$table->string('zip', 10);
 			$table->mediumInteger('home_phone');
 			$table->mediumInteger('work_phone')->nullable();
