@@ -23,8 +23,8 @@ class UserRepository implements UserRepositoryInterface{
 	}
 	
 	public function save(User $user){
-		if($user->push())
-			return true;
+		if($user->save())
+			return $user;
 		else
 			throw new \Exception('Saving error');
 	}

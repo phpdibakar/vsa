@@ -11,10 +11,14 @@ class UserProfile extends Model{
 	 * @var array
 	 */
 	
-	protected $fillable  = ['state_id', 'country_id', 'address', 'zip', 'home_phone', 'occupation'];
+	protected $fillable  = ['state_id', 'country_id', 'emergency_relation_id', 'address', 'zip', 'home_phone', 'occupation'];
 	
-	public function profile(){
+	public function user(){
 		return $this->belongsTo('VSA\Users\Model\User');
+	}
+	
+	public function defaultEmergencyNumber(){
+		return $this->hasOne('VSA\Users\Model\DefaultEmergencyContactNumber');
 	}
 	
 	/* validation rules 
@@ -35,14 +39,13 @@ class UserProfile extends Model{
 			'address' => 'required',
 			'city' => 'required|alpha',
 			'zip' => 'required',
-			'home_phone' => 'required|numeric|min:8|max:12',
+			'home_phone' => 'required|numeric|min:8',
 			'country_id' => 'required|numeric',
 			'state_id' => 'required|numeric',
-			'emergency_contact_name' => 'required|alpha',
+			'emergency_contact_name' => 'required',
 			'emergency_relation_id' =>'required|numeric',
-			'role_id' =>'required|numeric',
-			'emergency_phone_number' =>'required|numeric|min:8|max:12',
-			'occupation' =>'required|alpha',
+			'emergency_phone_number' =>'required|numeric|min:8',
+			'occupation' =>'required',
 		];
 	}
 

@@ -33,7 +33,7 @@ class User extends Model implements UserInterface, RemindableInterface, Staplera
 	 * @var array
 	 */
 	
-	protected $fillable  = ['fname', 'lname', 'avatar', 'visible', 'gender_id'];
+	protected $fillable  = ['fname', 'lname', 'email', 'dob', 'avatar', 'visible', 'gender_id', 'role_id'];
 	
 	//constructor 
 	public function __construct(array $attributes = array()) {
@@ -57,12 +57,13 @@ class User extends Model implements UserInterface, RemindableInterface, Staplera
 		return [
 			'fname' => 'required|alpha',
 			'lname' => 'required|alpha',
-			'email' => 'required|email|confirmed',
+			'email' => 'required|email|confirmed|unique:users,email',
 			//'email_confirmation' => 'required|email',
 			'dob' => 'required|date',
 			'password' => 'required|min:6|max:14|confirmed',
 			//'password_confirmation' => 'required|min:6|max:14|confirmed',
-			'gender_id' =>'required|numeric'
+			'gender_id' =>'required|numeric',
+			'role_id' =>'required|numeric',
 		];
 	}
 	
