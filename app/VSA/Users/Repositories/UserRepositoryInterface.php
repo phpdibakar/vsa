@@ -1,7 +1,7 @@
 <?php
 namespace VSA\Users\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
+use VSA\Users\Model\User;
 
 interface UserRepositoryInterface{
 	/**
@@ -20,7 +20,7 @@ interface UserRepositoryInterface{
 	 * @return Model.
 	 * @throws ModelNotFoundException when the user is not found
 	*/
-	public function save(Model $data);
+	public function save(User $data);
 	
 	/**
 	 * updates a user password against his current password hash 

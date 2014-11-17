@@ -75,33 +75,6 @@
 			</div>
 			<!-- start: PAGE -->
 			<div class="main-content">
-				<!-- start: PANEL CONFIGURATION MODAL FORM -->
-				<div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<h4 class="modal-title">Panel Configuration</h4>
-							</div>
-							<div class="modal-body">
-								Here will be a configuration form
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									Close
-								</button>
-								<button type="button" class="btn btn-primary">
-									Save changes
-								</button>
-							</div>
-						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-				</div>
-				<!-- /.modal -->
 				<!-- end: SPANEL CONFIGURATION MODAL FORM -->
 				<div class="container">
 					<!-- start: PAGE HEADER -->
@@ -131,30 +104,6 @@
 			</div>
 		</div>
 		<!-- end: FOOTER -->
-		<div id="event-management" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-							&times;
-						</button>
-						<h4 class="modal-title">Event Management</h4>
-					</div>
-					<div class="modal-body"></div>
-					<div class="modal-footer">
-						<button type="button" data-dismiss="modal" class="btn btn-light-grey">
-							Close
-						</button>
-						<button type="button" class="btn btn-danger remove-event no-display">
-							<i class='fa fa-trash-o'></i> Delete Event
-						</button>
-						<button type='submit' class='btn btn-success save-event'>
-							<i class='fa fa-check'></i> Save
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
 		<!--[if lt IE 9]>
 		<script src="assets/plugins/respond.min.js"></script>
@@ -172,14 +121,16 @@
 		<script src="{{ asset('js/main.js') }}"></script>
 		<!-- end: MAIN JAVASCRIPTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-		<script src="{{ asset('js/index.js') }}"></script>
+		
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
-				Index.init();
+				//Index.init();
 			});
 		</script>
+		<script src="{{ asset('js/Config/Config.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('js/Admin/Admin.js') }}" type="text/javascript"></script>
 		@yield('scripts')
 	</body>
 	<!-- end: BODY -->

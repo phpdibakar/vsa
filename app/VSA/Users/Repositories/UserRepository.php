@@ -22,8 +22,11 @@ class UserRepository implements UserRepositoryInterface{
 			throw new ModelNotFoundException('The user does not seem to exist', 1);
 	}
 	
-	public function save(Model $user){
-		
+	public function save(User $user){
+		if($user->push())
+			return true;
+		else
+			throw new \Exception('Saving error');
 	}
 	
 	public function updatePassword($userId, $newPassword, $oldPassword, $oldPasswordHash){

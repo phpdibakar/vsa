@@ -35,7 +35,7 @@ Route::get('/admin', function(){
 		return Redirect::to('/adminlogin');
 });
 
-Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function(){
+Route::group(array('prefix' => Config::get('app.adminPrefix'), 'before' => 'auth.admin'), function(){
 	
 	Route::controller('users', 'UserController');
 	

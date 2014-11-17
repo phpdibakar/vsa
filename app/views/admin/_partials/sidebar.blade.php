@@ -7,7 +7,7 @@
 					<!-- end: MAIN MENU TOGGLER BUTTON -->
 					<!-- start: MAIN NAVIGATION MENU -->
 					<ul class="main-navigation-menu">
-						<li class="active open">
+						<li rel="leftmenu-root-dashboard">
 							<a href="{{ URL::to('admin/users/dashboard') }}"><i class="clip-home-3"></i>
 								<span class="title"> Dashboard </span><span class="selected"></span>
 							</a>
@@ -45,7 +45,7 @@
 								</li>
 							</ul>
 						</li>
-						<li>
+						<li rel="leftmenu-root-approvals">
 							<a href="javascript:void(0)"><i class="clip-checkmark-circle"></i>
 								<span class="title"> Approvals </span><i class="icon-arrow"></i>
 								<span class="selected"></span>

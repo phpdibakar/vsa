@@ -3,10 +3,16 @@
 @section('page_title')
 	Update Admin Profile
 @stop
+
 @section('styles')
 	<link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileupload/bootstrap-fileupload.min.css') }}" type="text/css">
 @stop
+
+@section('page_desc')
+	<h1>Update Profile <small> </small></h1>
+@stop
 @section('content')
+
 @yield('message')
 	@if(Session::has('success'))
 		<div class="alert alert-success">
@@ -117,13 +123,13 @@
 									<label class="control-label">
 										Country
 									</label>
-									{{ Form::select('profile[country_id]', $countries, Input::old('profile[country_id]'), array('class' => 'form-control country', 'id' => 'country')); }}
+									{{ Form::select('profile[country_id]', $countries, Input::old('profile[country_id]'), array('class' => 'form-control country', 'id' => 'country')) }}
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										State
 									</label>
-									{{ Form::select('profile[state_id]', $states, Input::old('profile[state_id]'), array('class' => 'form-control states')); }}
+									{{ Form::select('profile[state_id]', $states, Input::old('profile[state_id]'), array('class' => 'form-control states')) }}
 									<div class="col-md-1 hidden" data-loader="states">
 											<img src="{{ asset('images/ajax-loader.gif') }}" alt="Loading.." />
 									</div>
@@ -241,8 +247,6 @@
 @section('scripts')
 	<script src="{{ asset('plugins/bootstrap-fileupload/bootstrap-fileupload.min.js') }}"></script>
 	<script src="{{ asset('plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-	<script src="{{ asset('js/Config/Config.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/Admin/Admin.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/Admin/AdminProfile.js') }}" type="text/javascript"></script>
 	<script>
 		app.AdminProfile.highLightCurrentTab('{{ $tab }}');

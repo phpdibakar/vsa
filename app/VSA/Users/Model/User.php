@@ -49,9 +49,22 @@ class User extends Model implements UserInterface, RemindableInterface, Staplera
     }
 	
 	/**
-	* Validation for login
+	* Validation rules for various sections
 	*
 	*/
+	
+	public static function getRegistrationValidationRules(){
+		return [
+			'fname' => 'required|alpha',
+			'lname' => 'required|alpha',
+			'email' => 'required|email|confirmed',
+			//'email_confirmation' => 'required|email',
+			'dob' => 'required|date',
+			'password' => 'required|min:6|max:14|confirmed',
+			//'password_confirmation' => 'required|min:6|max:14|confirmed',
+			'gender_id' =>'required|numeric'
+		];
+	}
 	
 	public static function getLoginValidationRules(){
 		return [

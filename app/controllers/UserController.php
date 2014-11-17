@@ -3,6 +3,8 @@ use VSA\Users\Repositories\UserRepository;
 use VSA\Users\Model\User;
 use VSA\Users\Model\Gender;
 use VSA\Users\Model\UserProfile;
+use VSA\Users\Model\EmergencyRelation;
+use VSA\Users\Model\Role;
 
 class UserController extends BaseController{
 	
@@ -16,6 +18,57 @@ class UserController extends BaseController{
 	
 	public function anyDashboard(){
 		return View::make('admin.users.dashboard');
+	}
+	
+	public function getRegister(){
+		$view = $this->isAdmin() ? 'admin.users.register' : 'users.register';
+		$genders = Gender::lists('name', 'id');
+		$countries = Country::lists('name', 'id');
+		$states = State::lists('name', 'id');
+		$relationships = EmergencyRelation::lists('name', 'id');
+		$roles = Role::where('id', '<>', Config::get('app.saId'))->lists('name', 'id');
+		return View::make($view, compact('genders', 'countries', 'states', 'relationships', 'roles'));
+	}
+	
+	public function postRegister(){
+		//initializing model validation
+		$validatorUser = Validator::make(Input::all(), User::getRegistrationValidationRules());
+		$validatorUser->setAttributeNames(User::getAttributesNiceNames());
+		$validatorUserProfile = Validator::make(Input::only('profile')['profile'], UserProfile::getRegistrationValidationRules());
+		
+		if(!$validatorUser->fails() && 
+			!$validatorUserProfile->fails())
+		{
+			try{
+				$user = User::find(0); //building an empty object
+				//$user = new User();
+				$user->fill(Input::except([
+						'_token',
+						'profile',
+					]
+				));
+				$user->profile->fill(Input::only([
+						'profile',
+					]
+				));
+				
+				$this->user->save($user);
+				
+				Redirect::to('/admin/users/register')
+						->with('success', 'Profile created successfully!');
+			}catch(\Exception $e){
+				Redirect::to('/admin/users/register')
+					-> with('error', $e->getMessage())
+					-> withError($validatorUser)
+					-> withError($validatorUserProfile)
+					-> withInput();
+			}
+		}else{
+			Redirect::to('/admin/users/register')
+					-> withError($validatorUser)
+					-> withError($validatorUserProfile)
+					-> withInput();
+		}
 	}
 	
 	public function postLogin(){
@@ -57,17 +110,16 @@ class UserController extends BaseController{
 		$genders = Gender::lists('name', 'id');
 		$countries = Country::lists('name', 'id');
 		$states = State::where('country_id', $user->profile->country_id)->lists('name', 'id');
+		
 		return View::make('admin.users.profile', compact('user', 'genders', 'countries', 'states', 'tab'));
 	}
 	
 	public function postProfile(){
-		$userValidationRules = User::getUpdateValidationRules();
-		$userProfileValidationRules = UserProfile::getUpdateValidationRules();
-		
-		$validatorUser = Validator::make(Input::all(), $userValidationRules);
+		//initializing model validation
+		$validatorUser = Validator::make(Input::all(), User::getUpdateValidationRules());
 		$validatorUser->setAttributeNames(User::getAttributesNiceNames());
 		
-		$validatorUserProfile = Validator::make(Input::only('profile')['profile'], $userProfileValidationRules);
+		$validatorUserProfile = Validator::make(Input::only('profile')['profile'], UserProfile::getUpdateValidationRules());
 		
 		if(!$validatorUser->fails() && !$validatorUserProfile->fails()){
 			
@@ -130,5 +182,9 @@ class UserController extends BaseController{
 			}
 		}else
 			return Redirect::to('admin/users/profile/email')->withError($validator);
+	}
+	
+	private function isAdmin(){
+		return (Route::getCurrentRoute()->getPrefix() == Config::get('app.adminPrefix'));
 	}
 }

@@ -199,5 +199,8 @@ return array(
 		'Image' => 'Iveoles\Image\Facades\Image',
 		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 	),
-
+	
+	'adminPrefix' => 'admin',
+	
+	'saId' => 1,
 );
