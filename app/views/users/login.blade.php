@@ -49,6 +49,7 @@
 							<span class="input-icon">
 								{{ Form::password('password', array('class' => 'form-control password', 'placeholder' => 'Password')) }}
 								<i class="fa fa-lock"></i>
+                            </span>
 						</div>
 						<div class="form-actions">
 							<label for="remember" class="checkbox-inline">
@@ -59,7 +60,7 @@
                             <label for="remember" class="checkbox-inline pull-right">
                             	<a class="forgot" href="javascript:;">
 									I forgot my password?
-								</a> </span>
+								</a> 
                             </label>
 							
 						</div>

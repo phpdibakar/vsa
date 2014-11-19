@@ -9,7 +9,7 @@
 @stop
 
 @section('styles')
-	<link rel="stylesheet" href="{{ asset('plugins/datepicker/css/datepicker.css') }}" type="text/css">
+	
 @stop
 @section('content')
 @yield('message')
@@ -127,7 +127,7 @@
                                                 <label class="col-sm-4 control-label">
                                                     Date of Birth <span class="symbol required"></span>
                                                 </label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-7 date-picker-hide">
                                                     <div class="input-group">
                                                         {{ Form::text('dob', Input::old('dob'), ['class' => 'form-control date-picker', 'placeholder' => 'Date of birth', 'tabindex' => 8, 'data-date-viewmode' => 'years', 'data-date-format' => 'yyyy-mm-dd']) }}
                                                         <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
@@ -347,7 +347,7 @@
                                     <div class="form-group">
                                                 <div class="col-sm-2 col-sm-offset-3 btn-custom-container1">
                                                     <button class="btn btn-custom back-step btn-block">
-                                                        <i class="fa fa-circle-arrow-left"></i> Back
+                                                        <i class="fa fa-arrow-circle-left"></i> Back
                                                     </button>
                                                 </div>
                                                 <div class="col-sm-2 col-sm-offset-3 btn-custom-container1">
@@ -436,7 +436,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-2 col-sm-offset-3 btn-custom-container1">
                                             <button class="btn btn-custom back-step btn-block">
-                                                <i class="fa fa-circle-arrow-left"></i> Back
+                                                <i class="fa fa-arrow-circle-left"></i> Back
                                             </button>
                                         </div>
                                         <div class="col-sm-2 col-sm-offset-3 btn-custom-container1">

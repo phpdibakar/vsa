@@ -6,7 +6,6 @@
 	<!--<![endif]-->
 	<!-- start: HEAD -->
 	<head>
-		@section('head')
 			<title>@yield('page_title')</title>
 			<!-- start: META -->
 			<meta charset="utf-8" />
@@ -27,13 +26,17 @@
 			<link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css') }}">
 			<link rel="stylesheet" href="{{ asset('plugins/perfect-scrollbar/src/perfect-scrollbar.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/theme_light.css') }}" id="skin_color">
+            <link rel="stylesheet" href="{{ asset('plugins/datepicker/css/datepicker.css') }}" type="text/css">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/style-responsive.css') }}">
 			<!--[if IE 7]>
 			<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome-ie7.min.css') }}">
 			<![endif]-->
+            <!--[if gte IE 9]>
+            <style type="text/css">.gradient{filter: none;}</style>
+			<![endif]-->
 			<!-- end: MAIN CSS -->
-		@show
+			@yield('styles')
 	</head>
 	<!-- end: HEAD -->
 	<!-- start: BODY -->
