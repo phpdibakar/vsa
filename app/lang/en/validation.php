@@ -70,7 +70,8 @@ return array(
 	),
 	"unique"               => "The :attribute has already been taken.",
 	"url"                  => "The :attribute format is invalid.",
-
+	'alpha_space' => 'The :attribute format is invalid',
+	'valid_phone' => 'The :attribute has invalid phone number',
 	/*
 	|--------------------------------------------------------------------------
 	| Custom Validation Language Lines

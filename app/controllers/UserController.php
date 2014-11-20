@@ -6,11 +6,13 @@ use VSA\Users\Model\UserProfile;
 use VSA\Users\Model\EmergencyRelation;
 use VSA\Users\Model\Role;
 use Illuminate\Support\MessageBag;
+use Illuminate\Events\Dispatcher;
 
 class UserController extends BaseController{
 	
-	public function __construct(UserRepository $user){
+	public function __construct(UserRepository $user, Dispatcher $event){
 		$this->user = $user;
+		$this->event = $event;
 	}
 	
 	function anyIndex(){
@@ -22,7 +24,7 @@ class UserController extends BaseController{
 	}
 	
 	public function getRegister(){
-		$view = $this->isAdmin() ? 'admin.users.register' : 'users.register';
+		$view = $this->_isAdmin() ? 'admin.users.register' : 'users.register';
 		$genders = Gender::lists('name', 'id');
 		$countries = Country::lists('name', 'id');
 		$states = State::lists('name', 'id');
@@ -54,11 +56,24 @@ class UserController extends BaseController{
 				$user->password = Hash::make(Input::get('password'));
 				
 				//saving the user data then updating profile data
-				$user = $this->user->save($user)
-					->profile()->createMany(Input::only('profile'));
+				$user = $this->user->save($user);
+				$userProfile = $user->profile()
+					->createMany(Input::only('profile'))[0]
+					->defaultEmergencyNumber()->create([
+						'number' => Input::get('preferred_cno'),
+						'type' => Input::get('default_cno_type')
+					]);
 				
-				return Redirect::to('/admin/users/register')
-						->with('success', 'Profile created successfully!');
+				//firing event to notify the user for this sign up
+				$this->event->fire('user.registered', array($user));
+				
+				//firing event to notify the admin when user signed up from the front-end
+				if(!$this->_isAdmin())
+					$this->event->fire('user.admin_notification_for_signup', array($user));
+				
+				return Redirect::to(
+					$this->_isAdmin() ? '/admin/users/register' : '/users/login'
+					)->with('success', 'The registration completed successfully!');
 			}catch(\Exception $e){
 				return Redirect::back()
 					-> with('error', $e->getMessage())
@@ -67,7 +82,6 @@ class UserController extends BaseController{
 					-> withInput();
 			}
 		}else{
-			//dd('here');
 			return Redirect::back()
 					-> withErrors(array_merge_recursive(
 						$validatorUser->messages()->toArray(),
@@ -85,21 +99,36 @@ class UserController extends BaseController{
 		
 		if($validator->fails()){
 			$message = $validator->messages();
-			return Redirect::to('/adminlogin')
+			return Redirect::back()
 				->withInput()
 				->withErrors($validator);
 		}else{
-			if(Auth::attempt(array(
+			$login_conditions = array(
 				'email' => Input::get('email'), 
 				'password' => Input::get('password'), 
-				'admin' => 1
-				), (bool)Input::get('remember')
+			);
+			
+			//special conditions for administration access
+			if($this->_isAdmin())
+				$login_conditions['admin'] = 1;
+			
+			if(Auth::attempt(
+				$login_conditions,
+				(bool)Input::get('remember')
 			))
-				return Redirect::intended('/admin/users/dashboard');
+				return Redirect::intended(
+					$this->_isAdmin() ? '/admin/users/dashboard' : 
+						'/users/dashboard'
+				);
 			else
-				return Redirect::to('/adminlogin')
+				return Redirect::back()
 				->withInput()
-				->withErrors(new MessageBag(['auth' => ['The email or password is wrong or your account is not authorized for administration.']]));
+				->withErrors(new MessageBag(
+					['auth' => [
+						$this->_isAdmin() ? 'The email or password is wrong or your account is not authorized for administration.' :
+							'The email or password is wrong'
+					]]
+				));
 		}
 	}
 	
@@ -190,7 +219,13 @@ class UserController extends BaseController{
 			return Redirect::to('admin/users/profile/email')->withError($validator);
 	}
 	
-	private function isAdmin(){
+	private function _isAdmin(){
 		return (Route::getCurrentRoute()->getPrefix() == Config::get('app.adminPrefix'));
 	}
+	
+	/* public function anyTestEvent(){
+		$user = User::find(2);
+		
+		Event::fire('user.registered', array($user));
+	} */
 }

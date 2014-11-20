@@ -258,7 +258,7 @@
 											Home Phone <span class="symbol required"></span>
 										</label>
 										<div class="col-sm-7">
-											{{ Form::text('profile[home_phone]', Input::old('profile[home_phone]'), ['class' => 'form-control', 'placeholder' => 'Home Phone', 'tabindex' => 10]) }}
+											{{ Form::text('profile[home_phone]', Input::old('profile[home_phone]'), ['class' => 'form-control phone', 'placeholder' => 'Home Phone', 'tabindex' => 10, 'data-default-radio-id' => 'default-home',]) }}
 													
 											@if($errors->has('home_phone'))
 												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('home_phone') }}</span>
@@ -266,7 +266,7 @@
 										</div>
 										<div class="col-sm-1">
 											<label class="radio-inline">
-												<input type="radio" class="green" value="" checked="checked" name="preferred_cno">
+												<input type="radio" class="green preferred" value="" checked="checked" name="preferred_cno" id="default-home" data-default-cno-type="Home" >
 											</label>
 										</div>
 									</div>
@@ -275,7 +275,7 @@
 											Work / Other
 										</label>
 										<div class="col-sm-7">
-											{{ Form::text('profile[work_phone]', Input::old('profile[work_phone]'), ['class' => 'form-control', 'placeholder' => 'Work / Other', 'tabindex' => 10]) }}
+											{{ Form::text('profile[work_phone]', Input::old('profile[work_phone]'), ['class' => 'form-control phone', 'placeholder' => 'Work / Other', 'tabindex' => 10, 'data-default-radio-id' => 'default-work-other',]) }}
 							
 											@if($errors->has('work_phone'))
 												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('work_phone') }}</span>
@@ -285,7 +285,7 @@
 										</div>
 										<div class="col-sm-1">
 											<label class="radio-inline">
-												<input type="radio" class="green" value="" checked="checked" name="preferred_cno">
+												<input type="radio" class="green preferred" value="" name="preferred_cno" id="default-work-other" disabled="disabled" data-default-cno-type="Work / Other">
 											</label>
 										</div>
 									</div>
@@ -323,7 +323,7 @@
 											Mobile
 										</label>
 										<div class="col-sm-7">
-											{{ Form::text('profile[mobile]', Input::old('profile[mobile]'), ['class' => 'form-control', 'placeholder' => 'Mobile', 'tabindex' => 10]) }}
+											{{ Form::text('profile[mobile]', Input::old('profile[mobile]'), ['class' => 'form-control phone', 'placeholder' => 'Mobile', 'tabindex' => 10, 'data-default-radio-id' => 'default-mobile',]) }}
 													
 											@if($errors->has('mobile'))
 												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('mobile') }}</span>
@@ -331,7 +331,7 @@
 										</div>
 										<div class="col-sm-1">
 											<label class="radio-inline">
-												<input type="radio" class="green" value="" checked="checked" name="preferred_cno">
+												<input type="radio" class="green preferred" value="" name="preferred_cno" id="default-mobile" data-default-cno-type="Mobile" disabled="disabled">
 											</label>
 										</div>
 									</div>
@@ -340,7 +340,7 @@
 											Pager
 										</label>
 										<div class="col-sm-7">
-											{{ Form::text('profile[pager]', Input::old('profile[pager]'), ['class' => 'form-control', 'placeholder' => 'Pager', 'tabindex' => 10]) }}
+											{{ Form::text('profile[pager]', Input::old('profile[pager]'), ['class' => 'form-control phone', 'placeholder' => 'Pager', 'tabindex' => 10, 'data-default-radio-id' => 'default-pager',]) }}
 													
 											@if($errors->has('pager'))
 												<span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('pager') }}</span>
@@ -348,7 +348,7 @@
 										</div>
 										<div class="col-sm-1">
 											<label class="radio-inline">
-												<input type="radio" class="green" value="" checked="checked" name="preferred_cno">
+												<input type="radio" class="green preferred" id="default-pager" value="" name="preferred_cno" disabled="disabled" data-default-cno-type="Pager">
 											</label>
 										</div>
 									</div>
@@ -366,7 +366,8 @@
 												Next <i class="fa fa-arrow-circle-right"></i>
 											</button>
 										</div>
-									</div>
+										<input type="hidden" name="default_cno_type" id="default_cno_type" value="" />
+							</div>
 						</div>
 						<div id="step-3">
 							<h2 class="StepTitle">Step 3 Additional Information</h2>

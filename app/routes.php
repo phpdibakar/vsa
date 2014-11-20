@@ -13,9 +13,10 @@
 
 Route::get('/', function()
 {
-	//return App::environment();
-	return View::make('hello');
+	return View::make('users.login');
 });
+
+Route::post('/users/login', array('uses' => 'UserController@postUserLogin'));
 
 //route to accept admin login
 Route::get('/adminlogin', function(){
@@ -31,7 +32,7 @@ Route::get('/admin', function(){
 
 //filter to check every access to the admin is validated with a logged in admin user
  Route::filter('auth.admin', function(){
-	if(!Auth::check())
+	if(!Auth::check() || !Auth::user()->admin)
 		return Redirect::to('/adminlogin');
 });
 
@@ -40,12 +41,16 @@ Route::group(array('prefix' => Config::get('app.adminPrefix'), 'before' => 'auth
 	Route::controller('users', 'UserController');
 	
 });
+
+//route to accept registration from the front-end
 Route::get('/users/register', array('as' => 'registration', 'uses' => 'UserController@getRegister'));
 
-//route to accept login
+//route to accept login for users at the front-end
 Route::get('/login', function(){
 	return View::make('users.login');
 });
+//route to verify user authentication for front access
+Route::post('/users/login', array('as' => 'user-login', 'uses' => 'UserController@postLogin'));
 
 //Route configuration to have forget password service functionality
 Route::controller('password', 'RemindersController');

@@ -29,10 +29,44 @@ var app = app || {};
 				var data = {country_id: $('.country option:selected').val()};
 				
 				_super.getStates(data, 'states');
+				
+				/*
+				* triggering blur events and already selected
+				* contact type when page refreshes 
+				* for the already entered contact numbers
+				*/
+				
+				$('.phone').trigger('blur');
+				$('#default_cno_type').val($('input.preferred:checked').data('default-cno-type') || '');
 			});
 			
 			$('.date-picker').datepicker({
 				autoclose: true
+			});
+			
+			$('.phone').on('blur', function(e){
+				var regExp = /^(\+[1-9][0-9]*(\([0-9]*\)|-[0-9]*-))?[0]?[1-9][0-9\- ]*$/;
+				//console.log(regExp.test($(this).val()));
+				var validated = regExp.test($(this).val());
+				var targetRadioId = $(this).data('default-radio-id') || null;
+				
+				try{
+					if(validated){
+						$('#' + targetRadioId).val($(this).val());
+						$('#' + targetRadioId).iCheck('enable');
+					}else{
+						$('#' + targetRadioId).val('');
+						$('#' + targetRadioId).iCheck('uncheck');
+						$('#' + targetRadioId).iCheck('disable');
+					}
+				}catch(error){
+					console.log(error);
+				}
+			});
+			
+			$('.preferred').on('ifChecked', function(){
+				var value = $(this).data('default-cno-type') || '';
+				$('#default_cno_type').val(value);
 			});
 		},
 		

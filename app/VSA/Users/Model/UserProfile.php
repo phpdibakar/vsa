@@ -30,7 +30,7 @@ class UserProfile extends Model{
 			'country_id' => 'required|numeric',
 			'address' => 'required|alpha_num',
 			'zip' => 'required|alpha_num',
-			'home_phone' => 'required|numeric',
+			'home_phone' => 'required|valid_phone',
 		];
 	}
 	
@@ -39,7 +39,7 @@ class UserProfile extends Model{
 			'address' => 'required',
 			'city' => 'required|alpha',
 			'zip' => 'required',
-			'home_phone' => 'required|numeric|min:8',
+			'home_phone' => 'required|valid_phone',
 			'country_id' => 'required|numeric',
 			'state_id' => 'required|numeric',
 			'emergency_contact_name' => 'required',

@@ -15,7 +15,7 @@ class DefaultEmergencyContactNumbersTableCreate extends Migration {
 		Schema::create('default_emergency_contact_numbers', function(Blueprint $table){
 			$table->increments('id');
 			$table->integer('user_profile_id')->unsigned();
-			$table->foreign('user_profile_id')->references('id')->on('user_profiles');
+			$table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
 			$table->string('number', 15);
 			$table->string('type_name', 20);
 			$table->timestamps();

@@ -22,7 +22,15 @@ var FormWizard = function () {
         $('.step-bar').css('width', valueNow + '%');
     };
     var initValidator = function () {
-        $.validator.setDefaults({
+		$.validator.addMethod('valid_phone', function(value, element){
+			return this.optional(element) || /^(\+[1-9][0-9]*(\([0-9]*\)|-[0-9]*-))?[0]?[1-9][0-9\- ]*$/.test(value);
+		}, 'Please write phone numbers in correct format');
+		
+		$.validator.addMethod('valid_zip', function(value, element){
+			return this.optional(element) || /^(\d{5}-\d{4}|\d{5}|\d{9})$|^([a-zA-Z]\d[a-zA-Z]( )?\d[a-zA-Z]\d)$/.test(value);
+		}, 'Please write a valid USA / Canada zip code');
+        
+		$.validator.setDefaults({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block',
             errorPlacement: function (error, element) { // render error placement for each input type
@@ -57,7 +65,7 @@ var FormWizard = function () {
 					maxlength: 14,
                     required: true
                 },
-                password_again: {
+                password_confirmation: {
                     required: true,
                     minlength: 6,
 					maxlength: 14,
@@ -75,8 +83,17 @@ var FormWizard = function () {
 					required: true
                 },
 				"profile[home_phone]" : {
-                    minlength: 6,
-					required: true
+					required: true,
+					valid_phone: true
+                },
+				"profile[work_phone]" : {
+                    valid_phone: true
+                },
+				"profile[mobile]" : {
+                    valid_phone: true
+                },
+				"profile[pager]" : {
+                    valid_phone: true
                 },
 				"profile[country_id]" : {
 					required: true
@@ -88,13 +105,15 @@ var FormWizard = function () {
                     required: true
                 },
                 "profile[zip]": {
-                    required: true
+                    required: true,
+					valid_zip: true
                 },
 				"profile[emergency_contact_name]": {
                     required: true
                 },
 				"profile[emergency_phone_number]": {
-                    required: true
+                    required: true,
+					valid_phone: true
                 },
 				"profile[emergency_relation_id]": {
                     required: true
