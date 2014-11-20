@@ -53,7 +53,7 @@
 					<!-- start: LOGO -->
 					<a class="navbar-brand" href="{{ URL::to('/admin/users/dashboard') }}">
 					
-						<img src="{{ Image::path(Settings::getLogoPath(). Settings::getLogoImage(), 'resizeCrop', 24, 24) }}" alt="{{ Settings::getName() }}" />
+						<img src="{{ Image::path(Settings::getLogoPath(). Settings::getLogoImage(), 'resizeCrop', 307, 40) }}" alt="{{ Settings::getName() }}" />
 					</a>
 					<!-- end: LOGO -->
 				</div>

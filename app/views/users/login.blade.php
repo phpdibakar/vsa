@@ -7,13 +7,13 @@
 	<div class="container">
 			<!-- start: LOGIN BOX -->
             <div class="box-login-headding">
-                <h1><span>Welcome to the </span> Volunteer Scheduling Service</h1>
-                <p>The Site offers a simple way to view schedules and sign-up for events Getting Started </p>
+                <h1><span>Welcome to the </span> {{ Settings::getName() }}</h1>
+                <p>{{ Settings::getTagline() }} </p>
             </div>
             <div class="main-login-box">
               <div class="box-login-link">
-                	<a href="#">If you are new to our site,please register here</a>
-                    <a href="#">Once Registered, or are a returning user, please sign in</a>
+                	<a href="{{ URL::route('registration') }}">If you are new to our site, please register here</a>
+                    <!-- <a href="#">Once Registered, or are a returning user, please sign in</a> -->
               </div>
               <div class="clearfix"></div>
               <div class="box-login">  
@@ -73,7 +73,7 @@
 					{{ Form::close() }}
                     <div class="login-contact">
                     	<p>If you have trouble accessing your account or</p>
-                        <p>registering,please contact <a href="mailto:volunteer@Scheduling.com">volunteer@Scheduling.com</a></p>
+                        <p>registering,please contact <a href="mailto:{{ Settings::getAdminEmail() }}">{{ Settings::getAdminEmail() }}</a></p>
                     </div>
 				</div>
             

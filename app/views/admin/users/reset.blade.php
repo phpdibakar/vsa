@@ -1,6 +1,6 @@
 @extends('admin.layouts.login')
 @section('page_title')
-	Administration Login
+	Reset Password
 @stop
 @section('content')
 <!-- start: FORGOT BOX -->

@@ -38,7 +38,7 @@
 	<body class="login example2">
 		<div class="main-login col-sm-4 col-sm-offset-4">
 			@section('logo')
-				<div class="logo">CLIP<i class="clip-clip"></i>ONE</div>
+				<div class="logo"><img src="{{ Image::path(Settings::getLogoPath(). Settings::getLogoImage(), 'resizeCrop', 307, 40) }}" alt="{{ Settings::getName() }}" /></div>
 			@show
 			
 			@yield('content')
@@ -46,7 +46,7 @@
 			@section('footer')
 			<!-- start: COPYRIGHT -->
 				<div class="copyright">
-					2013 &copy; clip-one by cliptheme.
+					{{ date('Y') }} &copy; {{ Settings::getName() }}.
 				</div>
 			@show
 			<!-- end: COPYRIGHT -->

@@ -16,41 +16,57 @@ Route::get('/', function()
 	return View::make('users.login');
 });
 
-Route::post('/users/login', array('uses' => 'UserController@postUserLogin'));
-
-//route to accept admin login
-Route::get('/adminlogin', function(){
-	return View::make('admin.users.login');
-});
-Route::post('/adminlogin', array('uses' => 'UserController@postLogin'));
-
-//Route to redirect to the admin user dashboard when /admin is called 
-Route::get('/admin', function(){
-	return Redirect::to('/admin/users/dashboard');
-});
-
-
-//filter to check every access to the admin is validated with a logged in admin user
- Route::filter('auth.admin', function(){
-	if(!Auth::check() || !Auth::user()->admin)
-		return Redirect::to('/adminlogin');
-});
-
-Route::group(array('prefix' => Config::get('app.adminPrefix'), 'before' => 'auth.admin'), function(){
-	
-	Route::controller('users', 'UserController');
-	
+Route::get('/users/login', function(){
+	return Redirect::to('/');
 });
 
 //route to accept registration from the front-end
-Route::get('/users/register', array('as' => 'registration', 'uses' => 'UserController@getRegister'));
+Route::get('/users/register', array('as' => 'registration', 'uses' => 'VSA\Controllers\Front\UserController@getRegister'));
+Route::post('/users/register', array('uses' => 'VSA\Controllers\Front\UserController@postRegister'));
 
-//route to accept login for users at the front-end
-Route::get('/login', function(){
-	return View::make('users.login');
-});
+
 //route to verify user authentication for front access
-Route::post('/users/login', array('as' => 'user-login', 'uses' => 'UserController@postLogin'));
+Route::post('/users/login', array('uses' => 'VSA\Controllers\Front\UserController@postLogin'));
+
+//route to accept admin login
+Route::get(Config::get('app.adminPrefix'). '/users/login', function(){
+	return View::make('admin.users.login');
+});
+
+Route::post(Config::get('app.adminPrefix'). '/users/login', array('uses' => 'VSA\Controllers\Admin\UserController@postLogin'));
+
+//Route to redirect to the admin user dashboard when /admin is called 
+Route::get('/'. Config::get('app.adminPrefix'), function(){
+	return Redirect::to(Config::get('app.adminPrefix'). '/users/dashboard');
+});
+
+Route::get('/users', function(){
+	return Redirect::to(Config::get('app.frontPrefix'). '/users/dashboard');
+});
+
+//filter to check users authenticity for their front-end access 
+Route::filter('auth.check', function(){
+	if(!Auth::check())
+		return Redirect::to('/users/login');
+});
+
+//Routing groups dedicated to handle front end protected modules
+Route::group(array('prefix' => Config::get('app.frontPrefix'), 'before' => 'auth.check'), function(){
+	Route::controller('users', 'VSA\Controllers\Front\UserController');
+});
+
+//filter to check every access to the admin is validated with a logged in admin user
+Route::filter('auth.admin', function(){
+	if(!Auth::check() || !Auth::user()->admin)
+		return Redirect::to(Config::get('app.adminPrefix'). '/users/login');
+});
+
+//Routing groups dedicated to handle administration modules
+Route::group(array('prefix' => Config::get('app.adminPrefix'), 'before' => 'auth.admin'), function(){
+	Route::controller('users', 'VSA\Controllers\Admin\UserController');
+});
+
+
 
 //Route configuration to have forget password service functionality
 Route::controller('password', 'RemindersController');

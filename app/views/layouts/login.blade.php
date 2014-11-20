@@ -46,7 +46,8 @@
 			<!--Header Open-->
             <header>
             @section('logo')
-				<div class="logo"><img src="{{ asset('images/logo.png') }}" alt="logo" class="img-responsive"></div>
+				<div class="logo">
+				<img src="{{ Image::path(Settings::getLogoPath(). Settings::getLogoImage(), 'resizeCrop', 307, 40) }}" alt="{{ Settings::getName() }}" /></div>
 			@show
             
             @section('navigation')
@@ -63,9 +64,9 @@
                     </div>
                     <div class="collapse navbar-collapse" id="main-navigation">
                       <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Registration</a></li>
-                        <li><a href="#">Contact us</a></li>
+                        <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
+                        <li><a href="{{ URL::route('registration')}}">Registration</a></li>
+                        <li><a href="{{ URL::to('pages/contact') }}">Contact us</a></li>
                       </ul>
                     </div>
                   </div>
@@ -86,14 +87,14 @@
             	<div class="container">
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="#">Feed Back</a></li>
-                            <li><a href="#">Terms of Use</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="{{ URL::to('/pages/feed-back') }}">Feed Back</a></li>
+                            <li><a href="{{ URL::to('/pages/terms') }}">Terms of Use</a></li>
+                            <li><a href="{{ URL::to('/pages/privacy') }}">Privacy</a></li>
+                            <li><a href="{{ URL::to('/pages/about') }}">About Us</a></li>
                         </ul>
                     </nav>
                     <div class="copyright">
-                        © Copyright Information Goes Here. All Right Reserved 
+						{{ date('Y') }} &copy; {{ Settings::getName() }}.
                     </div>
                 </div>
 			@show

@@ -103,6 +103,10 @@ var Login = function () {
         var errorHandler3 = $('.errorHandler', form3);
         form3.validate({
             rules: {
+				email: {
+					required: true,
+					email: true,
+				},
 				password: {
 					required: true,
 				},

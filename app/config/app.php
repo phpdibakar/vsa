@@ -200,7 +200,11 @@ return array(
 		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 	),
 	
+	//Back end routing prefix
 	'adminPrefix' => 'admin',
+	
+	//Front end routing prefix
+	'frontPrefix' => 'front',
 	
 	'saId' => 1,
 );

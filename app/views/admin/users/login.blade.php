@@ -15,7 +15,7 @@
 							<p> {{ Session::get('message') }}	</p>	
 					</div>
 				@endif	
-				{{ Form::open(array('url' => '/adminlogin', 'class' => 'form-login')) }}
+				{{ Form::open(array('url' => '/admin/users/login', 'class' => 'form-login')) }}
 					<div class="errorHandler alert alert-danger no-display">
 						<i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
 					</div>

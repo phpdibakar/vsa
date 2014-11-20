@@ -1,10 +1,17 @@
-@extends('admin.layouts.login')
+@extends('layouts.login')
 @section('page_title')
-	Administration Login
+	Forget Password
 @stop
 @section('content')
-<!-- start: FORGOT BOX -->
-			<div class="box-login">
+<div class="login-container">
+	<div class="container">
+			<!-- start: LOGIN BOX -->
+            <div class="main-login-box">
+              <div class="box-login">  
+				<h3>Forget Password</h3>
+				<p>
+					Please enter your email to get password recovery link. 
+				</p>
 				@if(Session::has('pwResetError'))
 					<div class="alert alert-danger">
 							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -16,12 +23,9 @@
 							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 							<p> {{ Session::get('pwReseStatus') }}	</p>	
 					</div>					
-				@endif
-				<h3>Forget Password?</h3>
-				<p>
-					Enter your e-mail address below to reset your password.
-				</p>
+				@endif	
 				{{ Form::open(array('url' => '/password/remind', 'class' => 'form-forgot')) }}
+					
 					<div class="errorHandler alert alert-danger no-display">
 						<i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
 					</div>
@@ -32,13 +36,21 @@
 								<i class="fa fa-envelope"></i> </span>
 						</div>
 						<div class="form-actions">
-							<button class="btn btn-light-grey" type="button" onclick="window.location.href='{{ URL::to('/adminlogin') }}'">
+							<button class="btn btn-light-grey" type="button" onclick="window.location.href='{{ URL::to('/') }}'">
 								<i class="fa fa-circle-arrow-left"></i> Back
 							</button>
 							{{ Form::submit('Reset Password', array('class' => 'btn btn-bricky pull-right')) }}
 						</div>
 					</fieldset>
 				{{ Form::close() }}
-			</div>
-			<!-- end: FORGOT BOX -->
+                    <div class="login-contact">
+                    	<p>If you have trouble accessing your account or</p>
+                        <p>registering,please contact <a href="mailto:volunteer@Scheduling.com">volunteer@Scheduling.com</a></p>
+                    </div>
+				</div>
+            
+			<!-- end: LOGIN BOX -->
+        </div>
+	</div>
+</div>
 @stop
