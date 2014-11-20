@@ -67,7 +67,7 @@ var app = app || {};
 				* again checking at least one cno is selected 
 				* otherwise default home cno is being selected
 				*/
-				console.log($('.preferred:checked').length);
+				
 				if(!$('.preferred:checked').length){
 					$('#default-home').iCheck('enable');
 					$('#default-home').iCheck('check');
