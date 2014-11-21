@@ -24,7 +24,7 @@ class TableUsersCreate extends Migration {
 			$table->string('lname');
 			$table->date('dob');
 			$table->string('avatar', 255)->nullable();
-			$table->tinyInteger('active');
+			$table->tinyInteger('active')->default(0);
 			$table->tinyInteger('admin')->default(0);
 			$table->tinyInteger('visible')->default(1);
 			$table->timestamps();

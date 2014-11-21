@@ -11,6 +11,11 @@
 @section('styles')
 	<link rel="stylesheet" href="{{ asset('plugins/datepicker/css/datepicker.css') }}" type="text/css">
 @stop
+
+@section('breadcrumbs')
+	{{ Breadcrumbs::render('user_registration') }}
+@stop
+
 @section('content')
 @yield('message')
 	@if(Session::has('success'))

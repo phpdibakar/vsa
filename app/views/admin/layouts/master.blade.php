@@ -81,8 +81,11 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<!-- start: PAGE TITLE & BREADCRUMB -->
-								@include('admin._partials.breadcrumb')
+								@yield('breadcrumbs')
 							<!-- end: PAGE TITLE & BREADCRUMB -->
+							<div class="page-header">
+								@yield('page_desc')
+							</div>
 						</div>
 					</div>
 					<!-- end: PAGE HEADER -->

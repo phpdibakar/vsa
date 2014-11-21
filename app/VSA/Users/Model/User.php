@@ -40,8 +40,9 @@ class User extends Model implements UserInterface, RemindableInterface, Staplera
         $this->hasAttachedFile('avatar', [
             'styles' => [
             'small' => '30x30',
-            'medium' => '300x300',
-            'thumb' => '150x150'
+			'medium' => '64x64',
+			'thumb' => '150x150',
+            'large' => '300x300',
             ]
         ]);
 

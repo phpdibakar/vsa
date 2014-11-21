@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array('as' => 'home', function()
 {
 	return View::make('users.login');
-});
+}));
 
 Route::get('/users/login', function(){
 	return Redirect::to('/');

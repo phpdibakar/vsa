@@ -21,13 +21,18 @@ use BaseController;
 
 class UserController extends BaseController{
 	
-	private $_adminPrefix;
+	const recordLimit = 15;
+	
+	private $_adminPrefix,
+		$_saId;
 	
 	public function __construct(UserRepository $user, Dispatcher $event){
 		$this->user = $user;
 		$this->event = $event;
 		
 		$this->_adminPrefix = Config::get('app.adminPrefix');
+		$this->_saId = Config::get('app.saId');
+		
 	}
 	
 	function anyIndex(){
@@ -217,5 +222,14 @@ class UserController extends BaseController{
 			}
 		}else
 			return Redirect::to($this->_adminPrefix. '/users/profile/email')->withError($validator);
+	}
+	
+	public function getList(){
+		//listing all users with all status excluding sa
+		$user = User::where('id', '<>', $this->_saId)
+			->with(['role', 'profile'])
+			->paginate(self::recordLimit);
+		
+		return View::make('admin.users.list')->withUsers($user);
 	}
 }

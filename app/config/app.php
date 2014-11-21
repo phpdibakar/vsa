@@ -206,5 +206,5 @@ return array(
 	//Front end routing prefix
 	'frontPrefix' => 'front',
 	
-	'saId' => 1,
+	'saId' => 2,
 );

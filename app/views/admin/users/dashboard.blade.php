@@ -5,6 +5,9 @@
 @section('page_desc')
 	<h1>Dashboard <small> </small></h1>
 @stop
+@section('breadcrumbs')
+	{{ Breadcrumbs::render('home') }}
+@stop
 @section('content')
 
 @stop

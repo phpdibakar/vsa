@@ -123,7 +123,7 @@ class UserController extends BaseController{
 				//firing event to notify the admin about the new sign up 
 				$this->event->fire('user.admin_notification_for_signup', array($user));
 				
-				return Redirect::to('/')->with('success', 'The registration completed successfully!');
+				return Redirect::to('/')->with('success', 'Thank you for your registration. You will receive a welcome email with further instructions.');
 			}catch(\Exception $e){
 				return Redirect::back()
 					-> with('error', $e->getMessage())

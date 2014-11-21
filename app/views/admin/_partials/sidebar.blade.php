@@ -8,17 +8,17 @@
 					<!-- start: MAIN NAVIGATION MENU -->
 					<ul class="main-navigation-menu">
 						<li rel="leftmenu-root-dashboard">
-							<a href="{{ URL::to('admin/users/dashboard') }}"><i class="clip-home-3"></i>
+							<a href="{{ URL::to(Config::get('app.adminPrefix'). '/users/dashboard') }}"><i class="clip-home-3"></i>
 								<span class="title"> Dashboard </span><span class="selected"></span>
 							</a>
 						</li>
-						<li>
-							<a href="{{ URL::to('admin/users/dashboard') }}"><i class="clip-book"></i>
+						<li rel="leftmenu-root-directory">
+							<a href="{{ URL::to(Config::get('app.adminPrefix'). '/users/list') }}"><i class="clip-book"></i>
 								<span class="title"> Directory </span><span class="selected"></span>
 							</a>
 						</li>
 						<li>
-							<a href="{{ URL::to('admin/users/dashboard') }}"><i class="clip-clock"></i>
+							<a href="{{ URL::to(Config::get('app.adminPrefix'). '/users/dashboard') }}"><i class="clip-clock"></i>
 								<span class="title"> Shift Schedule </span><span class="selected"></span>
 							</a>
 						</li>
