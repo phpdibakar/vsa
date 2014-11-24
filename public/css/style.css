@@ -101,6 +101,10 @@ color:#ffffff;transition: all 0.6s ease-in-out;-moz-transition: all 0.6s ease-in
 .register-page .help-block{display:block;width:100%;}
 .register-page #step-4 .control-label{padding-top:0;}
 
-/***Date Picker**/
+/***Date Picker***/
 .datepicker td.active, .datepicker td.active:hover, .datepicker td span.active{background: #d67105; background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Q2NzEwNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjMTQ2MDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);background: -moz-linear-gradient(top,  #d67105 0%, #c14600 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d67105), color-stop(100%,#c14600)); background: -webkit-linear-gradient(top,  #d67105 0%,#c14600 100%); background: -o-linear-gradient(top,  #d67105 0%,#c14600 100%); background: -ms-linear-gradient(top,  #d67105 0%,#c14600 100%); background: linear-gradient(to bottom,  #d67105 0%,#c14600 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d67105', endColorstr='#c14600',GradientType=0 );}
 .date-picker-hide .help-block{display:none !important;}
+
+/**Star Radio Button**/
+.star-radio .iradio_minimal-green{background-image:url(../images/star.png);background-repeat:no-repeat;background-position:center left;}
+.star-radio .iradio_minimal-green.checked{background-position:center right;}
