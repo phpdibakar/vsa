@@ -264,7 +264,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="col-sm-1">
-                                                    <label class="radio-inline">
+                                                    <label class="radio-inline star-radio">
                                                         <input type="radio" class="green preferred" value="" checked="checked" name="preferred_cno" id="default-home" data-default-cno-type="Home" >
                                                     </label>
                                                 </div>
@@ -283,7 +283,7 @@
                                                     <span class=""><i class="fa fa-info-circle"></i> * Preferred method of contact (1 selection only) </span>
                                                 </div>
                                                 <div class="col-sm-1">
-                                                    <label class="radio-inline">
+                                                    <label class="radio-inline star-radio">
                                                        <input type="radio" class="green preferred" value="" name="preferred_cno" id="default-work-other" disabled="disabled" data-default-cno-type="Work / Other">
                                                     </label>
                                                 </div>
@@ -329,7 +329,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="col-sm-1">
-                                                    <label class="radio-inline">
+                                                    <label class="radio-inline star-radio">
                                                         <input type="radio" class="green preferred" value="" name="preferred_cno" id="default-mobile" data-default-cno-type="Mobile" disabled="disabled">
                                                     </label>
                                                 </div>
@@ -346,7 +346,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="col-sm-1">
-                                                    <label class="radio-inline">
+                                                    <label class="radio-inline star-radio">
                                                         <input type="radio" class="green preferred" id="default-pager" value="" name="preferred_cno" disabled="disabled" data-default-cno-type="Pager">
                                                     </label>
                                                 </div>
