@@ -30,7 +30,7 @@ class UserRepository implements UserRepositoryInterface{
 	* @paran int limit
 	*/
 	public function getUsers(Builder $query, $limit = null){
-		User::where()
+		
 	}
 	
 	public function save(User $user){

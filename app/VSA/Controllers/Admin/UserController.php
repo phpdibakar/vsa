@@ -41,7 +41,7 @@ class UserController extends BaseController{
 		$countries = \Country::lists('name', 'id');
 		$states = \State::lists('name', 'id');
 		$relationships = EmergencyRelation::lists('name', 'id');
-		$roles = Role::where('id', '<>', Config::get('app.saId'))->lists('name', 'id');
+		$roles = Role::where('id', '<>', $this->_saId)->lists('name', 'id');
 		return View::make('admin.users.register', compact('genders', 'countries', 'states', 'relationships', 'roles'));
 	}
 	

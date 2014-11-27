@@ -280,7 +280,7 @@
                                                         <span class="help-block"><i class="fa fa-info-circle"></i> {{ $errors->first('work_phone') }}</span>
                                                     @endif
                                                     
-                                                    <span class=""><i class="fa fa-info-circle"></i> * Preferred method of contact (1 selection only) </span>
+                                                    <span class=""><img src="{{ asset('images/staricon.png')}}" alt="Star"> Preferred method of contact (1 selection only) </span>
                                                 </div>
                                                 <div class="col-sm-1">
                                                     <label class="radio-inline star-radio">
