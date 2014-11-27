@@ -10,7 +10,7 @@ class SettingsRepository implements SettingsRepositoryInterface{
 	protected $setting; 
 	
 	public function __construct(Setting $setting){
-		$this->setting = $setting->all()->first();
+		$this->setting = $setting->get(['name', 'tagline', 'admin_email', 'logo'])->first();
 	}
 	public function getName(){
 		if(isset($this->setting->name)){

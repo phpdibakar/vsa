@@ -134,7 +134,7 @@
 								</li>
 							</ul>
 						</li>
-						<li>
+						<li rel="system">
 							<a href="javascript:void(0)"><i class="clip-user-2"></i>
 								<span class="title">System Management</span>
 								<i class="icon-arrow"></i>
@@ -146,13 +146,13 @@
 										<span class="title">Approval s</span>
 									</a>
 								</li>
-								<li>
-									<a href="#">
+								<li rel="shift-categories">
+									<a href="{{ Url::to(Config::get('app.adminPrefix'). '/shifts/category-list') }}">
 										<span class="title">Categories</span>
 									</a>
 								</li>
-								<li>
-									<a href="#">
+								<li rel="user-roles">
+									<a href="{{ Url::to(Config::get('app.adminPrefix'). '/users/role-list') }}">
 										<span class="title">Roles</span>
 									</a>
 								</li>

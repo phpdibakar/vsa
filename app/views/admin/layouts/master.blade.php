@@ -29,6 +29,8 @@
 		<link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css') }}">
 		<link rel="stylesheet" href="{{ asset('plugins/perfect-scrollbar/src/perfect-scrollbar.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/theme_light.css') }}" type="text/css" id="skin_color">
+		<link rel="stylesheet" href="{{ asset('css/alertify.core.css') }}" type="text/css" id="skin_color">
+		<link rel="stylesheet" href="{{ asset('css/alertify.bootstrap.css') }}" type="text/css" id="skin_color">
 		<!--[if IE 7]>
 		<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome-ie7.min.css') }}">
 		<![endif]-->
@@ -121,6 +123,7 @@
 		<script src="{{ asset('plugins/perfect-scrollbar/src/perfect-scrollbar.js') }}"></script>
 		<script src="{{ asset('plugins/jquery-cookie/jquery.cookie.js') }}"></script>
 		<script src="{{ asset('plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js') }}"></script>
+		<script src="{{ asset('js/alertify.min.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
 		<!-- end: MAIN JAVASCRIPTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->

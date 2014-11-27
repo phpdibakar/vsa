@@ -8,7 +8,6 @@ use VSA\Users\Model\UserProfile;
 use VSA\Users\Model\EmergencyRelation;
 use VSA\Users\Model\Role;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -17,22 +16,15 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
 use Illuminate\Events\Dispatcher;
 
-use BaseController;
+use VSA\Controllers\Admin\BaseController;
 
 class UserController extends BaseController{
 	
-	const recordLimit = 15;
-	
-	private $_adminPrefix,
-		$_saId;
-	
 	public function __construct(UserRepository $user, Dispatcher $event){
+		parent::__construct();
+		
 		$this->user = $user;
 		$this->event = $event;
-		
-		$this->_adminPrefix = Config::get('app.adminPrefix');
-		$this->_saId = Config::get('app.saId');
-		
 	}
 	
 	function anyIndex(){
@@ -225,11 +217,110 @@ class UserController extends BaseController{
 	}
 	
 	public function getList(){
+		$recordLimit = Input::get('limit');
+		$recordLimit = (!empty($recordLimit) && in_array($recordLimit, parent::$pagination_limits)) ? 
+			$recordLimit : parent::recordLimit;
+		
 		//listing all users with all status excluding sa
 		$user = User::where('id', '<>', $this->_saId)
 			->with(['role', 'profile'])
-			->paginate(self::recordLimit);
+			->paginate(parent::recordLimit);
 		
-		return View::make('admin.users.list')->withUsers($user);
+		return View::make('admin.users.list')
+			->withUsers($user)
+			->withRecordlimit($recordLimit);
+	}
+	
+	public function getRoleList(){
+	$recordLimit = Input::get('limit');
+		$recordLimit = (!empty($recordLimit) && in_array($recordLimit, parent::$pagination_limits)) ? 
+			$recordLimit : parent::recordLimit;
+		$roles = $this->user->getRoles(null, $recordLimit == 'all' ? null : $recordLimit);
+		$permissions = $this->user->getRolePermissions();
+		return View::make('admin.users.list_roles')
+			->withRoles($roles)
+			->withPermissions($permissions)
+			->withRecordlimit($recordLimit);
+	}
+	
+	public function postRoleList(){
+		$validator = Validator::make(Input::all(), Role::getValidationRules());
+		if(!$validator->fails()){
+			$role = new Role();
+			$role->fill(
+				Input::only(['name', 'role_permission_id'])
+			);
+			try{
+				$this->user->saveRole($role);
+				return Redirect::to($this->_adminPrefix. '/users/role-list')->with('success', 'Role creation successful!');
+			}catch(\Exception $e){
+				return Redirect::back()->with('error', $e->getMessage())->withInput();
+			}
+		}else
+			return Redirect::back()->withErrors($validator)->withInput();
+	}
+	
+	/*
+	*	Method to update multiple shift categories based on the
+	*	selection
+	*/
+	public function postRoleMultiDelete(){
+		$role_ids = explode(',', Input::get('role_ids'));
+		if(count($role_ids)){
+			try{
+				foreach($role_ids as $key => $value){
+					if(!is_numeric($value))
+						continue;
+					
+					$role = Role::find($value);
+					$this->user->deleteRole($role);
+				}
+				return Redirect::back()->with('success', 'Selected roles deleted successfully');
+			}catch(\Exception $e){
+				return Redirect::back()->with('error', $e->getMessage());
+			}
+		}else
+			return Redirect::back()->with('error', 'One or more role required to be selected before delete');
+	}
+	
+	public function postRoleMultiUpdate(){
+		$selected_items_id = Input::get('id');
+		$selected_signup_status = Input::get('public_signup');
+		$selected_item_permission_id = Input::get('role_permission_id');
+		$selected_disp_rank = Input::get('disp_rank');
+		$selected_disp_order = Input::get('disp_order');
+		
+		$messages = new MessageBag();
+		
+		if(empty($selected_items_id)){
+			return Redirect::to($this->_adminPrefix. '/users/role-list')
+				->with('error', 'One or more role required to be selected before update')
+				->withInput();
+		}
+		
+		foreach($selected_items_id as $key => $value){
+			if( isset($selected_signup_status[$key]) && 
+				isset($selected_item_permission_id[$key]) && 
+				isset($selected_disp_rank[$key]) && 
+				isset($selected_disp_order[$key]) 
+			){
+				try{
+					$role = Role::find($value);
+					$role->public_signup = $selected_signup_status[$key];
+					$role->role_permission_id = $selected_item_permission_id[$key];
+					$role->disp_rank = $selected_disp_rank[$key];
+					$role->disp_order = $selected_disp_order[$key];
+					//now saving the changes
+					$this->user->saveRole($role);
+				}catch(\Exception $e){
+					$messages->add('error', $e->getMessage());
+				}
+			}
+			
+		}
+		if($messages->count())
+			return Redirect::back()->withErrors($messages);
+		else
+			return Redirect::to($this->_adminPrefix. '/users/role-list')->with('success', 'Selected roles updated successfully');
 	}
 }

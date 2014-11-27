@@ -121,8 +121,11 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		
 		'VSA\Users\UserServiceProvider',
+		'VSA\Shifts\ShiftServiceProvider',
 		'VSA\Settings\SettingsServiceProvider',
+		
 		'Orangehill\Iseed\IseedServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Iveoles\Image\ImageServiceProvider',

@@ -44,6 +44,7 @@
 		</div>
 	</div>
 </div>
+@if($users->getTotal() > VSA\Controllers\Admin\BaseController::$pagination_limits[0])
 <div class="row">
 	<div class="col-md-6">
 		<form role="form">
@@ -52,9 +53,10 @@
 					<label for="per_page">Display</label>
 				</div>
 				<div class="col-sm-4">
-					<select name="per_page" id="per_page" class="form-control">
-						<option value="10">10</option>
-						<option value="50">50</option>
+					<select name="per_page" id="pagination-per_page" class="form-control">
+						@foreach(VSA\Controllers\Admin\BaseController::$pagination_limits as $limit)
+							<option value="{{ $limit }}" {{ $recordlimit == $limit ? 'selected="selected"' : '' }}>{{ ucfirst($limit) }}</option>
+						@endforeach
 					</select>
 				</div>
 			</div>
@@ -62,10 +64,11 @@
 	</div>
 	<div class="col-md-6">
 		<div class="pull-right">
-			{{ $users->links() }}		
+			{{ $users->appends(array('limit' => $recordlimit))->links() }}		
 		</div>
 	</div>
 </div>
+@endif
 <div class="row">
 	<div class="col-sm-12">
 		<!-- start: RESPONSIVE TABLE PANEL -->

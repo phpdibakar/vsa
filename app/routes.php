@@ -64,6 +64,7 @@ Route::filter('auth.admin', function(){
 //Routing groups dedicated to handle administration modules
 Route::group(array('prefix' => Config::get('app.adminPrefix'), 'before' => 'auth.admin'), function(){
 	Route::controller('users', 'VSA\Controllers\Admin\UserController');
+	Route::controller('shifts', 'VSA\Controllers\Admin\ShiftController');
 });
 
 

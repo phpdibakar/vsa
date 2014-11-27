@@ -1,7 +1,9 @@
 <?php
 namespace VSA\Users\Repositories;
 
+use Illuminate\Database\Query\Builder;
 use VSA\Users\Model\User;
+use VSA\Users\Model\Role;
 
 interface UserRepositoryInterface{
 	/**
@@ -42,4 +44,48 @@ interface UserRepositoryInterface{
 	 * @throws Exception
 	*/
 	public function updateLoginEmail($userId, $email);
+	
+	/**
+	 * get the list of users with filtered using the query
+	 * @param Illuminate\Database\Query\Builder
+	 * @param optional int $limit
+	 * @return Illuminate\Database\Eloquent\Collection
+	 * @throws Exception
+	*/
+	public function getUsers(Builder $query, $limit = null);
+	
+	/**
+	 * get list of roles a user can register him/herslf
+	 * @param optional mixed ids for specific roles
+	 * @param optional int $limit
+	 * @return Illuminate\Database\Eloquent\Collection
+	 * @throws Exception
+	*/
+	public function getRoles($ids = null, $limit = null);
+	
+	/**
+	 * get list of roles permissions a role can have
+	 * @param optional mixed ids for specific roles
+	 * @param optional int $limit
+	 * @return Illuminate\Database\Eloquent\Collection
+	 * @throws Exception
+	*/
+	public function getRolePermissions($ids = null, $limit = null);
+	
+	/**
+	 * create or updates the data for user roles
+	 *
+	 * @param Role role
+	 * @return Role.
+	 * @throws ModelNotFoundException when the user is not found
+	*/
+	public function saveRole(Role $role);
+	
+	/**
+	 * delete a role
+	 * @param Role role
+	 * @return Role.
+	 * @throws ModelNotFoundException when the user is not found
+	*/
+	public function deleteRole(Role $role);
 }

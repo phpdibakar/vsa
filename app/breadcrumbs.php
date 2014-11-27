@@ -17,3 +17,18 @@ Breadcrumbs::register('user_registration', function($breadcrumbs) {
     $breadcrumbs->parent('users');
     $breadcrumbs->push('Registration', url(Config::get('app.adminPrefix'). '/users/register'));
 });
+
+Breadcrumbs::register('system', function($breadcrumbs){
+	$breadcrumbs->parent('home');
+	$breadcrumbs->push('System', url(Config::get('app.adminPrefix'). '/system/index'));
+});
+
+Breadcrumbs::register('shift_category', function($breadcrumbs){
+	$breadcrumbs->parent('system');
+	$breadcrumbs->push('Shift Category', url(Config::get('app.adminPrefix'). '/shifts/list-category'));
+});
+
+Breadcrumbs::register('user_roles', function($breadcrumbs){
+	$breadcrumbs->parent('system');
+	$breadcrumbs->push('Roles', url(Config::get('app.adminPrefix'). '/users/list-roles'));
+});
